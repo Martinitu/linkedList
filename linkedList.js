@@ -33,7 +33,10 @@ class linkedList {
     let previusHead = this.head;
     this.head = new node(value);
     this.head.next = previusHead;
-
+        return this
+    };
+    getHead(){
+        return this.head
     };
     size(){
        
@@ -45,8 +48,68 @@ class linkedList {
         }
         return count
     };
-    head(){
+    at(index){
+        if (!this.head) return null
+        let count = 0;
+        let node = this.head 
+       if (count < index){
+            count++
+            node = node.next
+            
+        }
+        return node
+        
+
+    };
+    pop(){
+        if (!this.head) return null
+       
+        if (!this.head.next){
+            this.head = null
+            return;
+        }
+        let nodeBeforeEnd = this.at(this.size() - 2);
+        nodeBeforeEnd.next = null
         return this.head
+    }
+    contains(value){
+        if(!this.head) return null;
+
+        let node = this.head;
+        while( node !== null) {
+            if (value === node.value) {
+                return true
+            }
+            node = node.next
+        }
+        return false;
+    };
+
+    finds(value){
+        if (!this.head) return null
+        let i = 0
+        let node = this.head 
+        while(node !== null){
+            
+            if (value === node.value) {
+                return i;
+            }
+            i++;
+            node = node.next;
+        }
+        return null;
+
+    };
+    toString(){
+        if (!this.head) return null
+
+        let output = "";
+        let node = this.head;
+        while (node.next !== null){
+            output = output + ' ' + node.value + ' ->';
+            node = node.next
+        }
+        return output + ' ' + node.value + ' -> null';
     }
 };
 
@@ -64,9 +127,12 @@ console.log(list.size())
 console.log(list.append(1))
 console.log(list.size())
 console.log(list.append(2))
-
-console.log(list)
-
 console.log(list.prepend(0))
+console.log(list.getHead().value)
+console.log(list.at(1).value)
+console.log(list.pop())
+console.log(list.finds(1))
 console.log(list)
+console.log(list.contains(1))
+console.log(list.toString())
 
